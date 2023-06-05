@@ -752,6 +752,9 @@ static void add_e820_map_from_mr(struct x86_linux_param_header *real_mode,
 			case RANGE_PRAM:
 				e820[i].type = E820_PRAM;
 				break;
+			case RANGE_SOFT_RESERVED:
+				e820[i].type = E820_SOFT_RESERVED;
+				break;
 			default:
 			case RANGE_RESERVED:
 				e820[i].type = E820_RESERVED;

@@ -99,6 +99,9 @@ static int get_memory_ranges_proc_iomem(struct memory_range **range, int *ranges
 		else if (strncasecmp(str, "reserved\n", 9) == 0) {
 			type = RANGE_RESERVED;
 		}
+		else if (strncasecmp(str, "soft reserved\n", 14) == 0) {
+			type = RANGE_SOFT_RESERVED;
+		}
 		else if (memcmp(str, "ACPI Tables\n", 12) == 0) {
 			type = RANGE_ACPI;
 		}
@@ -170,6 +173,8 @@ unsigned xen_e820_to_kexec_type(uint32_t type)
 			return RANGE_PMEM;
 		case E820_PRAM:
 			return RANGE_PRAM;
+		case E820_SOFT_RESERVED:
+			return RANGE_SOFT_RESERVED;
 		case E820_RESERVED:
 		default:
 			return RANGE_RESERVED;

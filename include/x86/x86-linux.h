@@ -23,6 +23,7 @@ struct e820entry {
 #define E820_NVS	4
 #define E820_PMEM       7
 #define E820_PRAM       12
+#define E820_SOFT_RESERVED 0xefffffff
 } __attribute__((packed));
 #endif
 

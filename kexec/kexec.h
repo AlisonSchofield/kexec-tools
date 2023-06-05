@@ -137,6 +137,7 @@ struct memory_range {
 #define RANGE_ACPI	2
 #define RANGE_ACPI_NVS	3
 #define RANGE_UNCACHED	4
+#define RANGE_SOFT_RESERVED	5
 #define RANGE_PMEM		6
 #define RANGE_PRAM		11
 };

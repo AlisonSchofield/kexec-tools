@@ -192,7 +192,10 @@ static int parse_memmap_entry(const char *entry, struct memory_range *range)
 		range->type = RANGE_PRAM;
 	else if (strcmp(type, "Persistent Memory") == 0)
 		range->type = RANGE_PMEM;
-	else {
+	else if (strcmp(type, "Soft Reserved") == 0) {
+		range->type = RANGE_SOFT_RESERVED;
+		fprintf(stderr, "ALISON kexec recognized SOFT_RESERVED\n");
+	} else {
 		fprintf(stderr, "Unknown type (%s) while parsing %s. Please "
 			"report this as bug. Using RANGE_RESERVED now.\n",
 			type, filename);

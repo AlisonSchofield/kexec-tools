@@ -288,6 +288,8 @@ static int get_crash_memory_ranges(struct memory_range **range, int *ranges,
 			type = RANGE_RESERVED;
 		} else if (memcmp(str, "Reserved\n", 9) == 0) {
 			type = RANGE_RESERVED;
+		} else if (memcmp(str, "Soft Reserved\n", 14) == 0) {
+			type = RANGE_SOFT_RESERVED;
 		} else if (memcmp(str, "GART\n", 5) == 0) {
 			gart_start = start;
 			gart_end = end;
@@ -619,6 +621,8 @@ static void cmdline_add_memmap_internal(char *cmdline, unsigned long startk,
 		strcat (str_mmap, "K#");
 	else if (type == RANGE_PRAM)
 		strcat (str_mmap, "K!");
+	else if (type == RANGE_SOFT_RESERVED)
+		strcat (str_mmap, "K%");
 
 	ultoa(startk, str_tmp);
 	strcat (str_mmap, str_tmp);
@@ -974,6 +978,7 @@ int load_crashdump_segments(struct kexec_info *info, char* mod_cmdline,
 		if ( !( mem_range[i].type == RANGE_ACPI
 			|| mem_range[i].type == RANGE_ACPI_NVS
 			|| mem_range[i].type == RANGE_RESERVED
+			|| mem_range[i].type == RANGE_SOFT_RESERVED
 			|| mem_range[i].type == RANGE_PMEM
 			|| mem_range[i].type == RANGE_PRAM))
 			continue;
